@@ -8,6 +8,28 @@
 
 - Use Case #4 - Statistics per DB Class (eg. db.t2.micro)
 
+#### Available Metrics
+Amazon provide guidance on which metrics and aggregation combinations are most useful (see [here](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/rds-metricscollected.html)) and these are listed in bold below. These are the only metrics that have been tested during development of this plugin. However, others *should* work.
+
+- _BinLogDiskUsage_ - (Unit: **Bytes**) The amount of disk space occupied by binary logs on the master. Applies to MySQL read replicas.
+- _CPUUtilization_ - (Unit: **Percent**) The percentage of CPU utilization.
+- _CPUCreditUsage_ - (Unit: **Count**) T2 instances only. Only available at 5 minute frequency. If you specify a period greater than 5 minutes, use *Sum* instead of *Average*. The number of CPU credits consumed by the instance.
+- _CPUCreditBalance_ - (Unit: **Count**) T2 instances only.Only available at 5 minute frequency. The number of CPU credits available for the instance to burst beyond its base CPU utilization. Credits are stored in the credit balance after they are earned and removed from the credit balance after they expire. Credits expire 24 hours after they are earned.
+- _DatabaseConnections_ - (Unit: **Count**) The number of database connections in use.
+- _DiskQueueDepth_ - (Unit: **Count**) The number of outstanding IOs (read/write requests) waiting to access the disk.
+- _FreeableMemory_ - (Unit: **Bytes**) The amount of available RAM.
+- _FreeStorageSpace_ - (Unit: **Bytes**) The amount of available storage space.
+- _ReplicaLag_ - (Unit: **Seconds**) Applies to MySQL, MariaDB and PostgreSQL Read Replicas. Amount of time a Read Replica DB instance lags behind the source DB instance.
+- _SwapUsage_ - (Unit: **Bytes**) Amount of swap space used on the DB instance.
+- _ReadIOPS_ - (Unit: **Count**) Average number of disk I/O operations per second.
+- _WriteIOPS_ - (Unit: **Count**) Average number of disk I/O operations per second.
+- _ReadLatency_ - (Unit: **Seconds**) Average amount of time taken per disk I/O operation.
+- _WriteLatency_ - (Unit: **Seconds**) Average amount of time taken per disk I/O operation.
+- _ReadThroughput_ - (Unit: **Bytes**) Average number of bytes read from disk per second.
+- _WriteThroughput_ - (Unit: **Bytes**) Average number of bytes written to disk per second.
+- _NetworkReceiveThroughput_ - (Unit: **Bytes**) The incoming (Receive) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication.
+- _NetworkTransmitThroughput_ - (Unit: **Bytes**) The outgoing (Transmit) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication.
+
 ## Prerequisites
 To use this plugin, you'll need the following details:
 

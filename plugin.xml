@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<!-- plugin.xml file written by Dynatrace Client 6.5.9 -->
+<plugin>
+  <extension point="com.dynatrace.diagnostics.pdk.pluginconfig" id="com.dynatrace.AWSCloudwatchRDS" name="AWS Cloudwatch RDS Plugin">
+    <information>
+      <category value="" />
+      <displayname value="AWS Cloudwatch RDS Plugin" />
+      <description value="Pull metrics from AWS Cloudwatch into Dynatrace for RDS" />
+      <supportlevel value="unsupported" />
+    </information>
+    <configuration>
+      <property key="accessKey" label="AWS Access Key" type="string" description="AWS Access Key" default="" multiline="false" />
+      <property key="secretKey" label="AWS Secret Key" type="password" description="AWS Secret Key" default="" />
+      <property key="awsRegion" label="AWS Region" type="string" description="eg. eu-west-2" default="eu-west-2" multiline="false" />
+      <property key="dataGranularity" label="Data Granularity" type="list" description="How far back in history is this data for? eg. Setting this to &quot;5 minutes&quot; and charting &quot;Average&quot; would give the datapoint for the average value of the previous 5 minutes." default="5 Minutes">
+        <list>
+          <item value="1 Minute" />
+          <item value="5 Minutes" />
+          <item value="10 Minutes" />
+          <item value="15 Minutes" />
+          <item value="30 Minutes" />
+          <item value="1 Hour" />
+        </list>
+      </property>
+      <property key="statsType" label="Statistics Type" type="list" description="Select the type of statistics. See Use Cases of: https://github.com/Dynatrace-Adam-Gardner/Dynatrace-AWS-RDS-Monitor" default="Statistics for all RDS Instances">
+        <list>
+          <item value="Statistics for all RDS Instances" />
+          <item value="Statistics per DB (eg. my-db-instance)" />
+          <item value="Statistics per DB Engine (eg. mysql)" />
+          <item value="Statistics per DB Class (eg. db.t2.micro)" />
+        </list>
+      </property>
+      <property key="DBDimensionInput" label="Database Dimension Input" type="string" description="Mandatory when using anything except &quot;Statistics for all RDS Instances&quot;.&#xA;Example inputs: my-db-instance OR mysql OR db.t2.micro " default="" multiline="false" />
+    </configuration>
+  </extension>
+  <extension point="com.dynatrace.diagnostics.pdk.monitor" id="com.dynatrace.AWSCloudwatchRDS.monitor" name="AWS Cloudwatch RDS Monitor">
+    <plugin configid="com.dynatrace.AWSCloudwatchRDS" class="com.dynatrace.AWSCloudwatchRDS.Plugin" />
+  </extension>
+  <extension point="com.dynatrace.diagnostics.pdk.monitormetricgroup" id="com.dynatrace.AWSCloudwatchRDS.metrics" name="AWS RDS Cloudwatch Metrics">
+    <metricgroup monitorid="com.dynatrace.AWSCloudwatchRDS.monitor">
+      <metric defaultrate="purepath" name="BinLogDiskUsage" unit="bytes" description="My metric description ..." />
+      <metric defaultrate="purepath" name="CPUUtilization" unit="percent" description="My metric description ..." />
+      <metric defaultrate="purepath" name="CPUCreditUsage" unit="number" description="T2 instances only." />
+      <metric defaultrate="purepath" name="CPUCreditBalance" unit="number" description="T2 instances only" />
+      <metric defaultrate="purepath" name="DatabaseConnections" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="DiskQueueDepth" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="FreeableMemory" unit="bytes" description="My metric description ..." />
+      <metric defaultrate="purepath" name="FreeableStorage" unit="bytes" description="My metric description ..." />
+      <metric defaultrate="purepath" name="ReplicaLag" unit="s" description=" Applies to MySQL, MariaDB, and PostgreSQL Read Replicas." />
+      <metric defaultrate="purepath" name="SwapUsage" unit="bytes" description="My metric description ..." />
+      <metric defaultrate="purepath" name="ReadIOPS" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="WriteIOPS" unit="number" description="My metric description ..." />
+      <metric defaultrate="purepath" name="ReadLatency" unit="s" description="My metric description ..." />
+      <metric defaultrate="purepath" name="WriteLatency" unit="s" description="My metric description ..." />
+      <metric defaultrate="purepath" name="ReadThroughput" unit="bytes" description="My metric description ..." />
+      <metric defaultrate="purepath" name="WriteThroughput" unit="bytes" description="My metric description ..." />
+      <metric defaultrate="purepath" name="NetworkReceiveThroughput" unit="bytes" description="My metric description ..." />
+      <metric defaultrate="purepath" name="NetworkTransmitThroughput" unit="bytes" description="My metric description ..." />
+    </metricgroup>
+  </extension>
+</plugin>

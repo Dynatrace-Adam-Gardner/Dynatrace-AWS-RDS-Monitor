@@ -56,3 +56,5 @@ The **data granularity** and the plugin schedule time **MUST** match. In the fol
 - "15 Minutes"
 - "30 Minutes"
 - "1 Hour"
+
+![Alt text](http://i68.tinypic.com/120rx2a.png)
